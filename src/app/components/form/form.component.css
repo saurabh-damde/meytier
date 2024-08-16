@@ -1,0 +1,23 @@
+form {
+  margin-top: 3%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 0% 1% 0% 1%;
+}
+
+.actions {
+  margin: 1% 0% 1% 0%;
+  display: flex;
+  justify-content: end;
+}
+button {
+  margin: 1%;
+}
