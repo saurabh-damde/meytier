@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+const candidate = require("./candidate-route");
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -18,5 +20,7 @@ app.use((req, res, nxt) => {
   );
   nxt();
 });
+
+app.use("/api/candidates", candidate);
 
 module.exports = app;

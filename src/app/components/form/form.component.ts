@@ -47,7 +47,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   onClear(form: NgForm) {
-    form.reset();
+    form.resetForm();
     this.candidateService.clearMeta();
   }
 
@@ -65,6 +65,6 @@ export class FormComponent implements OnInit, OnDestroy {
     } else {
       this.candidateService.addCandidate(this.candidate);
     }
-    form.reset();
+    form.resetForm();
   }
 }
