@@ -13,6 +13,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { FormComponent } from './components/form/form.component';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, FormComponent, DetailsComponent],
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     MatGridListModule,
     MatCardModule,
     MatDividerModule,

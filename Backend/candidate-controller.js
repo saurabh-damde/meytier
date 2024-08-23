@@ -24,7 +24,7 @@ exports.getCandidate = (req, res, nxt) => {
       if (result.rowCount === 0) {
         throw new Error("No data found!");
       } else {
-        res.status(200).json(result.rows);
+        res.status(200).json(result.rows[0]);
       }
     })
     .catch((err) => {
@@ -47,7 +47,7 @@ exports.addCandidate = (req, res, nxt) => {
       } else {
         res.status(201).json({
           message: "Candidate added successfully!",
-          result: result.rows,
+          result: result.rows[0],
         });
       }
       console.log(result);
@@ -73,7 +73,7 @@ exports.updateCandidate = (req, res, nxt) => {
       } else {
         res.status(200).json({
           message: "Candidate updated successfully!",
-          result: result.rows,
+          result: result.rows[0],
         });
       }
     })
@@ -94,7 +94,7 @@ exports.deleteCandidate = (req, res, nxt) => {
       } else {
         res.status(201).json({
           message: "Candidate deleted successfully!",
-          result: result.rows,
+          result: result.rows[0],
         });
       }
     })

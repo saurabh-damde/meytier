@@ -25,7 +25,9 @@ export class FormComponent implements OnInit, OnDestroy {
       (editMeta) => {
         this.editMeta = editMeta;
         if (this.editMeta?.editing) {
-          this.candidate = this.candidateService.getCandidate(this.editMeta.id);
+          this.candidateService
+            .getCandidate(this.editMeta.id)
+            .subscribe((candidate) => (this.candidate = candidate));
         } else {
           this.candidate = null;
         }
@@ -54,7 +56,7 @@ export class FormComponent implements OnInit, OnDestroy {
   onSubmit(form: NgForm) {
     const { name, address, age, phone } = form.value;
     this.candidate = {
-      id: this.candidate.id || null,
+      id: this.candidate?.id || null,
       name: name || this.candidate.name,
       address: address || this.candidate.address,
       age: age || this.candidate.age,
