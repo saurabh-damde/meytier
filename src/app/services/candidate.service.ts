@@ -60,8 +60,7 @@ export class CandidateService {
     this.http
       .post<{ message: string; candidate: Candidate }>(this.apiUrl, candidate)
       .subscribe((data) => {
-        this.candidates.push(data.candidate);
-        this.candidatesChanged.next(this.candidates?.slice());
+        this.getCandidates();
       });
   }
 
