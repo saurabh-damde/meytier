@@ -107,7 +107,7 @@ export class CandidateService {
     return candidates.sort((can1, can2) => {
       if (can1.id < can2.id) {
         return -1;
-      } else if (can2.id > can1.id) {
+      } else if (can1.id > can2.id) {
         return 1;
       } else {
         return 0;

@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -11,9 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DetailsComponent } from './components/details/details.component';
 import { FormComponent } from './components/form/form.component';
-import { MatCardModule } from '@angular/material/card';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, FormComponent, DetailsComponent],

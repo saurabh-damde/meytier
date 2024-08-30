@@ -53,7 +53,6 @@ exports.addCandidate = (req, res, nxt) => {
           result: result.rows[0],
         });
       }
-      console.log(result);
     })
     .catch((err) => {
       res.status(500).json({
