@@ -1,12 +1,15 @@
 const db = require("./db");
 
 exports.getCandidates = (req, res, nxt) => {
-  db.query("SELECT * FROM candidate")
+  db.query("SELECT id, info FROM candidate")
     .then((result) => {
       if (result.rowCount === 0) {
         throw new Error("No data found!");
       } else {
-        res.status(200).json(result.rows);
+        const data = result.rows.map((row) => {
+          return { ...row.info, id: row.id };
+        });
+        res.status(200).json(data);
       }
     })
     .catch((err) => {
@@ -19,12 +22,15 @@ exports.getCandidates = (req, res, nxt) => {
 
 exports.getCandidate = (req, res, nxt) => {
   const { id } = req.params;
-  db.query(`SELECT * FROM candidate WHERE id = $1`, [id])
+  db.query(`SELECT id, info FROM candidate WHERE id = $1`, [id])
     .then((result) => {
       if (result.rowCount === 0) {
         throw new Error("No data found!");
       } else {
-        res.status(200).json(result.rows[0]);
+        const data = result.rows.map((row) => {
+          return { ...row.info, id: row.id };
+        })[0];
+        res.status(200).json(data);
       }
     })
     .catch((err) => {
@@ -36,11 +42,8 @@ exports.getCandidate = (req, res, nxt) => {
 };
 
 exports.addCandidate = (req, res, nxt) => {
-  const { name, address, age, phone } = req.body;
-  db.query(
-    "INSERT INTO candidate (name, address, age, phone) VALUES ($1, $2, $3, $4)",
-    [name, address, age, phone]
-  )
+  const data = req.body;
+  db.query("INSERT INTO candidate (info) VALUES ($1)", [data])
     .then((result) => {
       if (result.rowCount === 0) {
         throw new Error("Couldn't add the candidate!");
@@ -62,11 +65,8 @@ exports.addCandidate = (req, res, nxt) => {
 
 exports.updateCandidate = (req, res, nxt) => {
   const { id } = req.params;
-  const { name, address, age, phone } = req.body;
-  db.query(
-    "UPDATE candidate SET name = $1, address = $2, age = $3, phone = $4 WHERE id = $5",
-    [name, address, age, phone, id]
-  )
+  const data = req.body;
+  db.query("UPDATE candidate SET info = $1 WHERE id = $2", [data, id])
     .then((result) => {
       if (result.rowCount === 0) {
         throw new Error("Couldn't update the candidate!");

@@ -30,23 +30,13 @@ export class CandidateService {
 
   constructor(private http: HttpClient) {}
 
-  private get uniqueId() {
-    let id: number;
-    let flag: boolean = false;
-    while (!flag) {
-      id = Math.ceil(Math.random() * 100);
-      flag = !this.candidates?.find((candidate) => candidate.id === id);
-    }
-    return id;
-  }
-
   get columns() {
     return this.displayColumns.slice();
   }
 
   getCandidates() {
     this.http.get<Candidate[]>(this.apiUrl).subscribe((candidates) => {
-      this.candidates = candidates;
+      this.candidates = this.sortCandidates(candidates);
       this.candidatesChanged.next(this.candidates?.slice());
     });
     return this.candidates?.slice();
@@ -111,5 +101,17 @@ export class CandidateService {
   clearMeta() {
     this.candidateChanged.next(null);
     this.editMetaChanged.next(null);
+  }
+
+  private sortCandidates(candidates: Candidate[]) {
+    return candidates.sort((can1, can2) => {
+      if (can1.id < can2.id) {
+        return -1;
+      } else if (can2.id > can1.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 }
